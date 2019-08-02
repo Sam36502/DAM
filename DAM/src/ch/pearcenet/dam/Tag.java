@@ -4,30 +4,42 @@ public class Tag {
 	
 	private String content;
 	
-	//Generate a 16-digit tag unique for each machine (Checks for duplicate digits in the first half)
+	//Generate a 32-digit tag unique for each machine (Checks for duplicate digits in the first half)
 	public Tag() {
 		StringBuilder tag = new StringBuilder("");
-		for (int digit=0; digit<16; digit++) {
-			
-			String hexStr = "";
-			if (digit < 8) {
-				
-				while (tag.indexOf(hexStr) != -1) {
-					int rand = (int)(Math.random() * 15 + 1);
-					hexStr = Integer.toHexString(rand);
-				}
-				
-			} else {
-				int rand = (int)(Math.random() * 15 + 1);
-				hexStr = Integer.toHexString(rand);
-			}
-			
+		
+		char[] insSet = {'0', '1', '2', '3',
+				'4', '5', '6', '7',
+				'8', '9', 'a', 'b',
+				'c', 'd', 'e', 'f'};
+		
+		//Scramble instruction set
+		for (int i=0; i<16; i++) {
+			int rand = (int)(Math.random() * 15 + 1);
+			char swp = insSet[rand];
+			insSet[rand] = insSet[i];
+			insSet[i] = swp;
+		}
+		
+		tag.append(insSet);
+		
+		//Making random language layout
+		for (int digit=16; digit<32; digit++) {
+			int rand = (int)(Math.random() * 15 + 1);
+			String hexStr = Integer.toHexString(rand);
 			tag.append(hexStr);
-			
 		}
 		content = tag.toString();
+		Main.log("Generated tag '" + content + "'");
 	}
 	
+	//Assign a specific tag
+	public Tag(String tag) {
+		this.content = tag;
+		Main.log("Set tag to '" + tag + "'.");
+	}
+	
+	//Returns the tag string
 	public String getTag() {
 		return content;
 	}
