@@ -97,7 +97,11 @@ public class RandVM {
 			
 			//Get a char from stdin and store in addr
 			case 0:
-				RAM[instruction[1]] = (byte) stdin.charAt(inputIndex);
+				if (inputIndex < stdin.length()) {
+					RAM[instruction[1]] = (byte) stdin.charAt(inputIndex);
+				} else {
+					RAM[instruction[1]] = 0;
+				}
 				break;
 			
 			//Print a char to stdout from addr
