@@ -28,10 +28,19 @@ public class RandVM {
 		this.tag = tag;
 		this.stdin = stdin;
 		
+		//Check tag length
+		if (tag.getTag().length() < 32) {
+			System.out.println("[ERROR] Given tag is too short. Must be 32-digit hexadecimal string.");
+		}
+		
 		//Generate InstructionSet
 		for (int i=0; i<8; i++) {
 			String currInstruction = tag.getTag().charAt(i) + "";
-			instructionSet[i] = Integer.parseInt(currInstruction, 16);
+			try {
+				instructionSet[i] = Integer.parseInt(currInstruction, 16);
+			} catch (NumberFormatException e) {
+				System.out.println("[ERROR] Invalid tag given.");
+			}
 		}
 	}
 	
