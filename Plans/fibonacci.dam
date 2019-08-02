@@ -1,0 +1,25 @@
+//fibbonacci
+
+//Limit is 100
+set 5 100
+
+//to convert numbers to ASCII
+set 6 48
+
+//Starting numbers
+set 1 0
+set 2 1
+
+//Start loop (line 9)
+add 1 6 7
+out 7
+
+add 1 2 3
+cpy 2 1
+cpy 3 2
+
+grt 2 5 4
+if 4
+else
+  jmp 9
+end
