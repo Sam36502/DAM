@@ -24,25 +24,28 @@ public class Main {
 			System.exit(0);
 		}
 		
-		//Set a custom tag to be used
-		if (argumentIndex(args, "tag") != -1) {
-			int tIndex = argumentIndex(args, "tag");
-			mainTag = new Tag(args[tIndex + 1]);
+		//Set all logs to be displayed
+		if (argumentIndex(args, "log") != -1) {
+			logsEnabled = true;
+			Main.log("Logs are enabled.");
 		}
 		
 		//Set a custom tag to be used
+		if (argumentIndex(args, "tag") != -1) {
+			int tIndex = argumentIndex(args, "tag");
+			String customTag = args[tIndex + 1];
+			mainTag = new Tag(customTag);
+		}
+		
+		//Set what input should be passed to the vm
 		if (argumentIndex(args, "in") != -1) {
 			int iIndex = argumentIndex(args, "in");
 			stdinString = args[iIndex + 1];
 		}
 		
-		//Set all logs to be displayed
-		if (argumentIndex(args, "log") != -1) {
-			logsEnabled = true;
-		}
-		
 		//Set the temp files to not be deleted
 		if (argumentIndex(args, "save") != -1) {
+			Main.log("Temporary files will be kept.");
 			keepFiles = true;
 		}
 		
