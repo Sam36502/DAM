@@ -35,8 +35,8 @@ public class Tag {
 	
 	//Assign a specific tag
 	public Tag(String tag) {
-		this.content = tag;
 		Main.log("Set tag to '" + tag + "'.");
+		this.content = tag;
 	}
 	
 	//Returns the tag string

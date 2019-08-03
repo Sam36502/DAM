@@ -1,0 +1,29 @@
+in {
+  in
+  read
+  get_input
+  INPUT
+  input
+  stdin
+  read_in
+  GET_INPUT
+}
+
+out {
+  out
+  print
+  set_output
+  OUTPUT
+  output
+  stdout
+  print_out
+  SET_OUTPUT
+}
+
+set {
+  set
+  poke
+  set_addr
+  ADDRSET
+  
+}

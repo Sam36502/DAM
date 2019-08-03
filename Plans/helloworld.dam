@@ -1,0 +1,31 @@
+//Helloworld
+
+//Load "Hello, world!" ASCII into ram
+set 1 72
+set 2 101
+set 3 108
+set 4 108
+set 5 111
+set 6 44
+set 7 32
+set 8 119
+set 9 111
+set 10 114
+set 11 108
+set 12 100
+set 13 33
+
+//Display String
+out 1
+out 2
+out 3
+out 4
+out 5
+out 6
+out 7
+out 8
+out 9
+out 10
+out 11
+out 12
+out 1301
