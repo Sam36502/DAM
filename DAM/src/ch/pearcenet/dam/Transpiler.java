@@ -24,18 +24,18 @@ public class Transpiler {
 	
 	public Transpiler(String filename, Tag tag) {
 		this.tag = tag;
-		Main.log("Loading the transpiler...");
+		Main.log("Loading transpiler files...");
 		
 		//Load the dam universal program into content
 		try {
-			FileInputStream fis = new FileInputStream("./progs/" + filename + ".dam");
+			FileInputStream fis = new FileInputStream(filename);
 			Scanner in = new Scanner(fis);
 			
 			int index = 0;
 			while (in.hasNextLine()) {
-				content[index] = in.nextLine();
+				content[index++] = in.nextLine();
 			}
-			Main.log("Loaded " + (index + 1) + "Lines of code");
+			Main.log("Loaded " + (index + 1) + " Lines of code\n");
 			
 			in.close();
 			fis.close();
@@ -48,6 +48,7 @@ public class Transpiler {
 		}
 		
 		//Load the chosen syntax from the syntax file
+		Main.log("Loading RandLang Syntax:");
 		try {
 			FileInputStream fis = new FileInputStream("./data/RandLang_Syntax");
 			Scanner in = new Scanner(fis);
@@ -56,17 +57,17 @@ public class Transpiler {
 			int innerIndex = 0;
 			while (in.hasNextLine()) {
 				int randOpcode = tag.getIntOfIndex(16 + opcode);
-				String line = in.nextLine();
+				String line = in.nextLine().trim();
 				
 				if (line.contains("{")) {
 					line = line.substring(0, line.indexOf('{') - 1).trim();
-					Main.log("Loading RandLang syntax for '" + line + "'...");
 					innerIndex = 0;
 				} else if (line.contains("}")) {
 					opcode++;
 				} else if (line.length() != 0) {
 					if (randOpcode == innerIndex) {
 						syntax[opcode] = line;
+						Main.log("Syntax for '" + DAM_ASSEMBLY[opcode] + "' -> '" + line + "'.");
 					}
 					innerIndex++;
 				}

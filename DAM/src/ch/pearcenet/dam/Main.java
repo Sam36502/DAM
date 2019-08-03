@@ -53,6 +53,7 @@ public class Main {
 		
 		//Start Transpiling
 		String program = args[args.length - 1];
+		Main.log("Loading " + program + "...");
 		Transpiler tp = new Transpiler(program, mainTag);
 		tp.transpile();
 		tp.writeToFile("./tmp/" + program + "-" + mainTag.getTag() + ".txt");
@@ -98,7 +99,7 @@ public class Main {
 				"Examples:\n" + 
 				"  DAM.bat -h\n" + 
 				"  DAM.bat helloworld.dam\n" + 
-				"  DAM.bat -t ea9140b67f3c2d858bdd3d88595239a8 helloworld.dam");
+				"  DAM.bat -t 674daf093e8b51c2948f5bb14b426c3d helloworld.dam");
 	}
 
 }
