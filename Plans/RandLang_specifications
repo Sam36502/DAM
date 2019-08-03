@@ -19,4 +19,4 @@ RandLang keywords and RandVM instruction set
 14 end      : ends an if/else statement
 15 jmp x    : Jumps to any line in the program
 
-16 nop      : Does nothing, ends the program
+16 (empty)  : Does nothing
