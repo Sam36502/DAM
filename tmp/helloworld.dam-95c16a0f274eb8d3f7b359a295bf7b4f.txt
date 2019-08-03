@@ -1,0 +1,256 @@
+//Helloworld
+
+//Load "Hello, world!" ASCII into ram
+POKE 1 72
+POKE 2 101
+POKE 3 108
+POKE 4 108
+POKE 5 111
+POKE 6 44
+POKE 7 32
+POKE 8 119
+POKE 9 111
+POKE 10 114
+POKE 11 108
+POKE 12 100
+POKE 13 33
+
+//Display String
+SET_OUTPUT 1
+SET_OUTPUT 2
+SET_OUTPUT 3
+SET_OUTPUT 4
+SET_OUTPUT 5
+SET_OUTPUT 6
+SET_OUTPUT 7
+SET_OUTPUT 8
+SET_OUTPUT 9
+SET_OUTPUT 10
+SET_OUTPUT 11
+SET_OUTPUT 12
+SET_OUTPUT 13
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
