@@ -1,6 +1,6 @@
 package ch.pearcenet.dam;
 
-import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -41,7 +41,7 @@ public class Transpiler {
 			fis.close();
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("[ERROR] Can't find program '" + filename + "'");
+			System.out.println("[ERROR] Can't find program '" + filename + "'.");
 			System.exit(2);
 		} catch (IOException e) {
 			Main.log("Failed to close FileInputStream for program");
@@ -50,7 +50,7 @@ public class Transpiler {
 		//Load the chosen syntax from the syntax file
 		Main.log("Loading RandLang Syntax:");
 		try {
-			FileInputStream fis = new FileInputStream("./data/RandLang_Syntax");
+			FileInputStream fis = new FileInputStream("data/RandLang_Syntax");
 			Scanner in = new Scanner(fis);
 			
 			int opcode = 0;
@@ -60,7 +60,6 @@ public class Transpiler {
 				String line = in.nextLine().trim();
 				
 				if (line.contains("{")) {
-					line = line.substring(0, line.indexOf('{') - 1).trim();
 					innerIndex = 0;
 				} else if (line.contains("}")) {
 					opcode++;
@@ -78,10 +77,10 @@ public class Transpiler {
 			fis.close();
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("[ERROR] Can't find syntax file");
+			System.out.println("[ERROR] Can't find syntax file.");
 			System.exit(2);
 		} catch (IOException e) {
-			Main.log("Failed to close FileInputStream for syntax file");
+			Main.log("Failed to close FileInputStream for syntax file.");
 		}
 		
 		Main.log("Finished loading all necessary files.");
@@ -91,8 +90,12 @@ public class Transpiler {
 	public void writeToFile(String filename) {
 		
 		Main.log("Writing transpiled program to '" + filename + "'...");
+		File file = new File(filename);
+		
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+			
+			
+			FileWriter out = new FileWriter(file);
 			
 			for (String line: content) {
 				out.write(line + System.lineSeparator());
@@ -101,6 +104,7 @@ public class Transpiler {
 			out.close();
 		} catch (IOException e) {
 			System.out.println("[ERROR] Failed to create the temporary files necessary.");
+			e.printStackTrace();
 			System.exit(2);
 		}
 		Main.log("Done.");
@@ -121,24 +125,30 @@ public class Transpiler {
 		
 		Main.log("Transpiling the file to RandLang...");
 		for (int i=0; i<content.length; i++) {
-			String curr = content[i];
+			if (content[i] == null) {
+				break;
+			}
+			
+			String curr = content[i].trim();
 			
 			//So long as the line isn't empty or a comment
 			if (curr.length() > 0 && !"//".equals(curr.substring(0, 2))) {
 				
 				//Get the universal syntax string and search for the corresponding random Syntax
-				String univSyntax = curr.substring(0, curr.indexOf(' ') - 1);
-				String randSyntax = null;
-				do {
-					int syndex = indexInArray(DAM_ASSEMBLY, univSyntax);
-					
-					if (syndex != -1) {
-						randSyntax = syntax[syndex];
-					}
-				} while (randSyntax == null);
+				String univSyntax = curr.substring(0, curr.indexOf(' '));
+				String randSyntax;
+				
+				int syndex = indexInArray(DAM_ASSEMBLY, univSyntax);
+				
+				if (syndex != -1) {
+					randSyntax = syntax[syndex];
+				} else {
+					continue;
+				}				
 				
 				//Swap the universal syntax for random syntax
 				content[i] = curr.replace(univSyntax, randSyntax);
+				Main.log("Transpiled Line: "+content[i]);
 				
 			}
 			
