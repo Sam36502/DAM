@@ -49,7 +49,7 @@ public class Transpiler {
 		
 		//Load the chosen syntax from the syntax file
 		try {
-			FileInputStream fis = new FileInputStream("./Plans/RandLang_Syntax");
+			FileInputStream fis = new FileInputStream("./data/RandLang_Syntax");
 			Scanner in = new Scanner(fis);
 			
 			int opcode = 0;
