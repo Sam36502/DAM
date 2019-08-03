@@ -7,9 +7,8 @@ import java.util.Scanner;
 public class RandVM {
 	
 	//Maximum number of lines a program can be
-	private static final int MAX_PROGLEN = 256;
+	public static final int MAX_PROGLEN = 256;
 	
-	private Tag tag;
 	private String stdin;
 	private int[] instructionSet = new int[8];
 	private byte[] RAM = new byte[256];
@@ -25,7 +24,6 @@ public class RandVM {
 	private static final int[] argCount = {1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0, 0, 1, 0};
 	
 	public RandVM (Tag tag, String stdin) {
-		this.tag = tag;
 		this.stdin = stdin;
 		
 		//Check tag length
@@ -41,7 +39,7 @@ public class RandVM {
 				instructionSet[i] = Integer.parseInt(currInstruction, 16);
 			} catch (NumberFormatException e) {
 				System.out.println("[ERROR] Invalid tag given.");
-				System.exit(1);
+				System.exit(2);
 			}
 		}
 	}
@@ -181,7 +179,7 @@ public class RandVM {
 					RAM[instruction[3]] = 2;
 				}
 				break;
-			
+
 			//Start if statement
 			case 12:
 				isIfStatement = true;

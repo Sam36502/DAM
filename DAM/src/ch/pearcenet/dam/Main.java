@@ -12,7 +12,7 @@ public class Main {
 		String stdinString = "";
 		
 		//Help menu
-		if (argumentIndex(args, "help") != -1) {
+		if (indexInArray(args, "help") != -1) {
 			helpMenu();
 			System.exit(0);
 		}
@@ -25,39 +25,41 @@ public class Main {
 		}
 		
 		//Set all logs to be displayed
-		if (argumentIndex(args, "log") != -1) {
+		if (indexInArray(args, "log") != -1) {
 			logsEnabled = true;
 			Main.log("Logs are enabled.");
 		}
 		
 		//Set a custom tag to be used
-		if (argumentIndex(args, "tag") != -1) {
-			int tIndex = argumentIndex(args, "tag");
+		if (indexInArray(args, "tag") != -1) {
+			int tIndex = indexInArray(args, "tag");
 			String customTag = args[tIndex + 1];
 			mainTag = new Tag(customTag);
+		} else {
+			mainTag = new Tag();
 		}
 		
 		//Set what input should be passed to the vm
-		if (argumentIndex(args, "in") != -1) {
-			int iIndex = argumentIndex(args, "in");
+		if (indexInArray(args, "in") != -1) {
+			int iIndex = indexInArray(args, "in");
 			stdinString = args[iIndex + 1];
 		}
 		
 		//Set the temp files to not be deleted
-		if (argumentIndex(args, "save") != -1) {
+		if (indexInArray(args, "save") != -1) {
 			Main.log("Temporary files will be kept.");
 			keepFiles = true;
 		}
 		
+		//Start Transpiling
+		String program = args[args.length - 1];
+		Transpiler tp = new Transpiler(program, mainTag);
+		tp.transpile();
+		tp.writeToFile("./tmp/" + program + "-" + mainTag.getTag() + ".txt");
 		
-		//Load and run a file with the vm
-		if (mainTag == null) mainTag = new Tag();
+		//TODO: Add compiler steps here
+		
 		RandVM vm = new RandVM(mainTag, stdinString);
-		
-		//TODO: Add transpiler and compiler steps here
-		
-		String programFile = args[args.length - 1];
-		
 		
 	}
 	
@@ -69,7 +71,7 @@ public class Main {
 	}
 	
 	//Checks if a String array contains a value
-	public static int argumentIndex(String[] arr, String val) {
+	public static int indexInArray(String[] arr, String val) {
 		for (int i=0; i<arr.length; i++) {
 			if (("--" + val).equals(arr[i]) ||
 				("-" + val.charAt(0)).equals(arr[i])) {

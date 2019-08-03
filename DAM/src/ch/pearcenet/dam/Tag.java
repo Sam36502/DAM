@@ -43,5 +43,11 @@ public class Tag {
 	public String getTag() {
 		return content;
 	}
+	
+	//Returns the integer value of a single character
+	public int getIntOfIndex(int index) {
+		char ch = content.charAt(index);
+		return Integer.parseInt("" + ch, 16);
+	}
 
 }
