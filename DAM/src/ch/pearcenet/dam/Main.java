@@ -12,7 +12,7 @@ public class Main {
 		String stdinString = "";
 		
 		//Help menu
-		if (indexInArray(args, "help") != -1) {
+		if (argmumentIndex(args, "help") != -1) {
 			helpMenu();
 			System.exit(0);
 		}
@@ -25,14 +25,14 @@ public class Main {
 		}
 		
 		//Set all logs to be displayed
-		if (indexInArray(args, "log") != -1) {
+		if (argmumentIndex(args, "log") != -1) {
 			logsEnabled = true;
 			Main.log("Logs are enabled.");
 		}
 		
 		//Set a custom tag to be used
-		if (indexInArray(args, "tag") != -1) {
-			int tIndex = indexInArray(args, "tag");
+		if (argmumentIndex(args, "tag") != -1) {
+			int tIndex = argmumentIndex(args, "tag");
 			String customTag = args[tIndex + 1];
 			mainTag = new Tag(customTag);
 		} else {
@@ -40,13 +40,13 @@ public class Main {
 		}
 		
 		//Set what input should be passed to the vm
-		if (indexInArray(args, "in") != -1) {
-			int iIndex = indexInArray(args, "in");
+		if (argmumentIndex(args, "in") != -1) {
+			int iIndex = argmumentIndex(args, "in");
 			stdinString = args[iIndex + 1];
 		}
 		
 		//Set the temp files to not be deleted
-		if (indexInArray(args, "save") != -1) {
+		if (argmumentIndex(args, "save") != -1) {
 			Main.log("Temporary files will be kept.");
 			keepFiles = true;
 		}
@@ -71,7 +71,7 @@ public class Main {
 	}
 	
 	//Checks if a String array contains a value
-	public static int indexInArray(String[] arr, String val) {
+	public static int argmumentIndex(String[] arr, String val) {
 		for (int i=0; i<arr.length; i++) {
 			if (("--" + val).equals(arr[i]) ||
 				("-" + val.charAt(0)).equals(arr[i])) {
@@ -82,6 +82,7 @@ public class Main {
 	}
 	
 	//Help Menu
+	//TODO: Needs some fixing up
 	public static void helpMenu() {
 		System.out.println("Usage:\n" + 
 				"  DAM.bat [-ht] program\n" + 

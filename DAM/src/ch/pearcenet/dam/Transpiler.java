@@ -105,6 +105,16 @@ public class Transpiler {
 		Main.log("Done.");
 	}
 	
+	//Returns the index of an element in an array (-1 if no result)
+	public int indexInArray(String[] arr, String element) {
+		for (int i=0; i<arr.length; i++) {
+			if (element.equals(arr[i])) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	//Transpile the file and save changes into content array
 	public void transpile() {
 		
@@ -119,7 +129,7 @@ public class Transpiler {
 				String univSyntax = curr.substring(0, curr.indexOf(' ') - 1);
 				String randSyntax = null;
 				do {
-					int syndex = Main.indexInArray(DAM_ASSEMBLY, univSyntax);
+					int syndex = indexInArray(DAM_ASSEMBLY, univSyntax);
 					
 					if (syndex != -1) {
 						randSyntax = syntax[syndex];
