@@ -1,5 +1,7 @@
 package ch.pearcenet.dam;
 
+import java.io.File;
+
 public class Main {
 	
 	public static boolean logsEnabled = false;
@@ -56,7 +58,10 @@ public class Main {
 		Main.log("Loading " + program + "...");
 		Transpiler tp = new Transpiler(program, mainTag);
 		tp.transpile();
-		tp.writeToFile("./tmp/" + program + "-" + mainTag.getTag() + ".txt");
+		
+		//Get the name of the program and write the transpiled code to the temp file
+		File progFile = new File(program);
+		tp.writeToFile("tmp/" + progFile.getName() + "-" + mainTag.getTag() + ".txt");
 		
 		//TODO: Add compiler steps here
 		
@@ -64,7 +69,7 @@ public class Main {
 		
 	}
 	
-	//Logs to the screen as long as logging is enabled
+	//Logs to the screen if logging is enabled
 	public static void log(String msg) {
 		if (logsEnabled) {
 			System.out.println(msg);

@@ -7,14 +7,14 @@ in {
   stdin
   read_in
   GET_INPUT
-  
-  
-  
-  
-  
-  
-  
-  
+  in
+  read
+  get_input
+  INPUT
+  input
+  stdin
+  read_in
+  GET_INPUT
 }
 
 out {
@@ -26,13 +26,14 @@ out {
   stdout
   print_out
   SET_OUTPUT
-  
-  
-  
-  
-  
-  
-  
+  out
+  print
+  set_output
+  OUTPUT
+  output
+  stdout
+  print_out
+  SET_OUTPUT
 }
 
 set {
@@ -44,14 +45,14 @@ set {
   setaddr
   set_address
   SET_ADDRESS
-  
-  
-  
-  
-  
-  
-  
-  
+  set
+  poke
+  set_addr
+  POKE
+  addrset
+  setaddr
+  set_address
+  SET_ADDRESS
 }
 
 cpy {
@@ -63,14 +64,14 @@ cpy {
   copy_addr
   copy_value
   copy_from_one_address_to_another
-  
-  
-  
-  
-  
-  
-  
-  
+  cpy
+  copy
+  copy_val
+  COPY_VAL
+  COPY
+  copy_addr
+  copy_value
+  copy_from_one_address_to_another
 }
 
 add {
@@ -81,15 +82,20 @@ add {
   addition
   perform_addition
   add_nums
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  add
+  add_num
+  ADD
+  ADDITION
+  addition
+  perform_addition
+  add_nums
+  add
+  add_num
+  ADD
+  ADDITION
+  addition
+  perform_addition
+  add_nums
 }
 
 sub {
@@ -100,15 +106,20 @@ sub {
   subtraction
   perform_subtraction
   sub_nums
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  sub
+  sub_num
+  SUB
+  SUBTRACTION
+  subtraction
+  perform_subtraction
+  sub_nums
+  sub
+  sub_num
+  SUB
+  SUBTRACTION
+  subtraction
+  perform_subtraction
+  sub_nums
 }
 
 mul {
@@ -119,15 +130,20 @@ mul {
   multiplication
   perform_multiplication
   mul_nums
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  mul
+  mul_num
+  MUL
+  MULTIPLICATION
+  multiplication
+  perform_multiplication
+  mul_nums
+  mul
+  mul_num
+  MUL
+  MULTIPLICATION
+  multiplication
+  perform_multiplication
+  mul_nums
 }
 
 div {
@@ -138,15 +154,20 @@ div {
   division
   perform_division
   div_nums
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  div
+  div_num
+  DIV
+  DIVISION
+  division
+  perform_division
+  div_nums
+  div
+  div_num
+  DIV
+  DIVISION
+  division
+  perform_division
+  div_nums
 }
 
 mod {
@@ -157,15 +178,20 @@ mod {
   MODULO
   perform_MODULO
   mod_nums
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  mod
+  mod_num
+  MOD
+  MODULO
+  MODULO
+  perform_MODULO
+  mod_nums
+  mod
+  mod_num
+  MOD
+  MODULO
+  MODULO
+  perform_MODULO
+  mod_nums
 }
 
 equ {
@@ -176,15 +202,20 @@ equ {
   EQUAL
   equal
   are_nums_the_same
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  equ
+  cmp
+  isEqual
+  cmp_equal
+  EQUAL
+  equal
+  are_nums_the_same
+  equ
+  cmp
+  isEqual
+  cmp_equal
+  EQUAL
+  equal
+  are_nums_the_same
 }
 
 grt {
@@ -195,15 +226,20 @@ grt {
   GREATER
   greater
   is_num_greater_than
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  grt
+  greater_than
+  isGreaterThan
+  cmp_greater
+  GREATER
+  greater
+  is_num_greater_than
+  grt
+  greater_than
+  isGreaterThan
+  cmp_greater
+  GREATER
+  greater
+  is_num_greater_than
 }
 
 lst {
@@ -214,15 +250,20 @@ lst {
   LESS
   less
   is_num_less_than
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  lst
+  less_than
+  isLessThan
+  cmp_less
+  LESS
+  less
+  is_num_less_than
+  lst
+  less_than
+  isLessThan
+  cmp_less
+  LESS
+  less
+  is_num_less_than
 }
 
 if {
@@ -232,9 +273,33 @@ if {
   IF
   IF_TRUE
   checkIfTrue
+  if
+  is_num_one
+  if_true
+  IF
+  IF_TRUE
+  checkIfTrue
+  if
+  is_num_one
+  if_true
+  IF
+  IF_TRUE
+  checkIfTrue
 }
 
 else {
+  else
+  else_num_zero
+  else_false
+  ELSE
+  ELSE_FALSE
+  ifNotTrue
+  else
+  else_num_zero
+  else_false
+  ELSE
+  ELSE_FALSE
+  ifNotTrue
   else
   else_num_zero
   else_false
@@ -253,9 +318,28 @@ end {
   FINISH
   done
   finished_if_stmt
+  end
+  end_if
+  fi
+  endif
+  END
+  END_IF
+  FINISH
+  done
+  finished_if_stmt
 }
 
 jmp {
+  jmp
+  jump
+  goto
+  GOTO
+  JUMP
+  JUMP_TO
+  jump_to
+  jumpToLine
+  gotoLine
+  goto_line
   jmp
   jump
   goto
