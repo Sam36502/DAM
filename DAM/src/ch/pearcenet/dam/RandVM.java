@@ -1,8 +1,8 @@
 package ch.pearcenet.dam;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class RandVM {
 	
@@ -10,7 +10,8 @@ public class RandVM {
 	public static final int MAX_PROGLEN = 256;
 	
 	private String stdin;
-	private int[] instructionSet = new int[8];
+	private String stdout = "";
+	private int[] instructionSet = new int[16];
 	private byte[] RAM = new byte[256];
 	private int[][] progMem = new int[MAX_PROGLEN][4];
 	
@@ -33,54 +34,77 @@ public class RandVM {
 		}
 		
 		//Generate InstructionSet
-		for (int i=0; i<8; i++) {
-			String currInstruction = tag.getTag().charAt(i) + "";
-			try {
-				instructionSet[i] = Integer.parseInt(currInstruction, 16);
-			} catch (NumberFormatException e) {
-				System.out.println("[ERROR] Invalid tag given.");
-				System.exit(2);
-			}
+		for (int i=0; i<16; i++) {
+			instructionSet[i] = tag.getIntOfIndex(i);
 		}
 	}
 	
 	//Loads a binary executable file
 	public void loadBinary(String filename) {
-		Scanner in = null;
+		Main.log("Loading Compiled binary...");
 		try {
-			FileInputStream fis = new FileInputStream(filename);
-			in = new Scanner(fis);
-		} catch (FileNotFoundException e) {
-			System.out.println("[ERROR] Couldn't load Binary file '"+filename+"'");
-			return;
-		}
-		
-		//Load all the instructions into program memory
-		int progCount = 1;
-		while (in.hasNext() && progCount < MAX_PROGLEN) {
-			byte insByte = in.nextByte();
-			progMem[progCount][0] = getLogicalIns(insByte);
+			File file = new File(filename);
+			FileReader in = new FileReader(file);
 			
-			for (int i=0; i<argCount[progMem[progCount][0]]; i++) {
-				progMem[progCount][i + 1] = in.nextByte();
+			//Load all the instructions into program memory
+			int progCount = 1;
+			while (in.ready() && progCount < MAX_PROGLEN) {
+				byte insByte = (byte) in.read();
+				int logicalIns = getLogicalIns(insByte);
+				
+				if (logicalIns == -1) {
+					
+					progMem[progCount][0] = 16;
+					
+				} else {
+					
+					progMem[progCount][0] = logicalIns;					
+					for (int i=0; i<argCount[progMem[progCount][0]]; i++) {
+						progMem[progCount][i + 1] = (byte) in.read();
+					}
+					
+				}
+				
+				progCount++;
 			}
+			
+			in.close();
+		} catch (IOException e) {
+			System.out.println("[ERROR] Couldn't load Binary file '"+filename+"'");
+			System.exit(4);
 		}
-		
-		in.close();
+		Main.log("Done.\n");
 		
 	}
 	
 	//Run a full program from Prog Memory
 	public void runProg() {
-		Main.log("Running program...\n----");
+		Main.log("Running program...\n--------------------\nProgram Output:\n--------------------");
 		
 		int[] instruction = {0};
+		
+		if (Main.showProg) System.out.println("\nprg: ins arg arg arg\n--------------------");
 		while (programCounter < MAX_PROGLEN) {
 			instruction = progMem[programCounter++];
+			
+			if (Main.showProg && instruction[0] != 16) {
+				if (programCounter < 10) System.out.print(" ");
+				if (programCounter < 100) System.out.print(" ");
+				System.out.print(programCounter + ":");
+				
+				for (int i: instruction) {
+					if (i < 10) System.out.print(" ");
+					if (i < 100) System.out.print(" ");
+					System.out.print(" " + i);
+				}
+				System.out.println(" ");
+			}
+			
 			compute(instruction);
 		}
+		System.out.println(stdout);
 		
-		Main.log("----\nProgram Ended.");
+		Main.log("\n--------------------\nProgram Ended.");
 	}
 	
 	//Perform a computation using the VM
@@ -88,13 +112,7 @@ public class RandVM {
 		int ins = instruction[0];
 		
 		//Check if we're in an unsuccessful if block
-		if (isIfStatement && !isIfSuccessful) {
-			return;
-		}
-		
-		//Check number of args is correct
-		if (argCount[ins] != instruction.length - 1) {
-			Main.log("Incorrect number of ");
+		if (isIfStatement && !isIfSuccessful && ins != 13 && ins != 14) {
 			return;
 		}
 		
@@ -107,7 +125,7 @@ public class RandVM {
 			//Get a char from stdin and store in addr
 			case 0:
 				if (inputIndex < stdin.length()) {
-					RAM[instruction[1]] = (byte) stdin.charAt(inputIndex);
+					RAM[instruction[1]] = (byte) stdin.charAt(inputIndex++);
 				} else {
 					RAM[instruction[1]] = 0;
 				}
@@ -115,7 +133,11 @@ public class RandVM {
 			
 			//Print a char to stdout from addr
 			case 1:
-				System.out.print("" + (char) RAM[instruction[1]]);
+				if (Main.showProg) {
+					stdout += (char) RAM[instruction[1]];
+				} else {
+					System.out.print((char) RAM[instruction[1]]);
+				}
 				break;
 			
 			//Sets an address to a value
@@ -145,11 +167,21 @@ public class RandVM {
 				
 			//Divides two numbers and stores result
 			case 7:
+				if (instruction[2] < 1) {
+					System.out.println("[ERROR] Attempted to divide by zero.");
+					System.exit(1);
+				}
+				
 				RAM[instruction[3]] = (byte) Math.floorDiv(RAM[instruction[1]],  RAM[instruction[2]]);
 				break;
 				
 			//Divides two numbers and stores remainder
 			case 8:
+				if (instruction[2] < 1) {
+					System.out.println("[ERROR] Attempted to divide by zero.");
+					System.exit(1);
+				}
+				
 				RAM[instruction[3]] = (byte) (RAM[instruction[1]] % RAM[instruction[2]]);
 				break;
 			
@@ -158,7 +190,7 @@ public class RandVM {
 				if (RAM[instruction[1]] == RAM[instruction[2]]) {
 					RAM[instruction[3]] = 1;
 				} else {
-					RAM[instruction[3]] = 2;
+					RAM[instruction[3]] = 0;
 				}
 				break;
 			
@@ -167,7 +199,7 @@ public class RandVM {
 				if (RAM[instruction[1]] > RAM[instruction[2]]) {
 					RAM[instruction[3]] = 1;
 				} else {
-					RAM[instruction[3]] = 2;
+					RAM[instruction[3]] = 0;
 				}
 				break;
 			
@@ -176,14 +208,14 @@ public class RandVM {
 				if (RAM[instruction[1]] < RAM[instruction[2]]) {
 					RAM[instruction[3]] = 1;
 				} else {
-					RAM[instruction[3]] = 2;
+					RAM[instruction[3]] = 0;
 				}
 				break;
 
 			//Start if statement
 			case 12:
 				isIfStatement = true;
-				isIfSuccessful = (RAM[instruction[1]] == 1);
+				isIfSuccessful = (RAM[instruction[1]] > 0);
 				break;
 			
 			//end if, start else
@@ -198,7 +230,7 @@ public class RandVM {
 			
 			//Jumps to a specific line in program memory
 			case 15:
-				programCounter = RAM[instruction[1]];
+				programCounter = instruction[1];
 				break;
 		}
 		
@@ -206,7 +238,7 @@ public class RandVM {
 	
 	//Returns the Logical instruction number for the given random instruction
 	public int getLogicalIns(int randIns) {
-		for (int i=0; i<8; i++) {
+		for (int i=0; i<16; i++) {
 			if (instructionSet[i] == randIns) {
 				return i;
 			}
