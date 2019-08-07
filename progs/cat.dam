@@ -1,0 +1,10 @@
+//A Cat program
+//Prints out whatever was passed as input
+
+//Start of Loop
+in 0
+
+if 0
+  out 0
+  jmp 4
+end
