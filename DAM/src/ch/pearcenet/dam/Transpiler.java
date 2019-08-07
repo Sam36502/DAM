@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Transpiler {
 	
-	String[] content = new String[RandVM.MAX_PROGLEN];
-	String[] syntax = new String[16];
+	private String[] content = new String[RandVM.MAX_PROGLEN];
+	private String[] syntax = new String[16];
 	Tag tag;
 	
 	public static final String[] DAM_ASSEMBLY = {
@@ -24,7 +24,6 @@ public class Transpiler {
 	
 	public Transpiler(String filename, Tag tag) {
 		this.tag = tag;
-		Main.log("Loading transpiler files...");
 		
 		//Load the dam universal program into content
 		try {
@@ -42,15 +41,15 @@ public class Transpiler {
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("[ERROR] Can't find program '" + filename + "'.");
-			System.exit(2);
+			System.exit(1);
 		} catch (IOException e) {
 			Main.log("Failed to close FileInputStream for program");
 		}
 		
 		//Load the chosen syntax from the syntax file
-		Main.log("Loading RandLang Syntax:");
+		Main.log("Loading RandLang Syntax...");
 		try {
-			FileInputStream fis = new FileInputStream("data/RandLang_Syntax");
+			FileInputStream fis = new FileInputStream("RandLang_Syntax.txt");
 			Scanner in = new Scanner(fis);
 			
 			int opcode = 0;
@@ -66,7 +65,6 @@ public class Transpiler {
 				} else if (line.length() != 0) {
 					if (randOpcode == innerIndex) {
 						syntax[opcode] = line;
-						Main.log("Syntax for '" + DAM_ASSEMBLY[opcode] + "' -> '" + line + "'.");
 					}
 					innerIndex++;
 				}
@@ -83,7 +81,7 @@ public class Transpiler {
 			Main.log("Failed to close FileInputStream for syntax file.");
 		}
 		
-		Main.log("Finished loading all necessary files.");
+		Main.log("Finished loading all necessary files.\n");
 	}
 	
 	//Write content to a file
@@ -105,19 +103,9 @@ public class Transpiler {
 		} catch (IOException e) {
 			System.out.println("[ERROR] Failed to create the temporary files necessary.");
 			e.printStackTrace();
-			System.exit(2);
+			System.exit(1);
 		}
 		Main.log("Done.");
-	}
-	
-	//Returns the index of an element in an array (-1 if no result)
-	public int indexInArray(String[] arr, String element) {
-		for (int i=0; i<arr.length; i++) {
-			if (element.equals(arr[i])) {
-				return i;
-			}
-		}
-		return -1;
 	}
 	
 	//Transpile the file and save changes into content array
@@ -134,11 +122,25 @@ public class Transpiler {
 			//So long as the line isn't empty or a comment
 			if (curr.length() > 0 && !"//".equals(curr.substring(0, 2))) {
 				
+				String univSyntax = "";
+				
 				//Get the universal syntax string and search for the corresponding random Syntax
-				String univSyntax = curr.substring(0, curr.indexOf(' '));
+				if (curr.indexOf(' ') == -1
+					&& !"else".equals(curr)
+					&& !"end".equals(curr)) {
+					Main.log("[ERROR] Syntax error on line " + (i + 1) + ":\n"
+							+ "  No whitespace character found."
+							+ "  Line 24: '" + curr + "'.");
+					System.exit(1);
+				} else if ("else".equals(curr) || "end".equals(curr)) {
+					univSyntax = curr;
+				} else {
+					univSyntax = curr.substring(0, curr.indexOf(' '));
+				}
+				
 				String randSyntax;
 				
-				int syndex = indexInArray(DAM_ASSEMBLY, univSyntax);
+				int syndex = Main.indexInArray(DAM_ASSEMBLY, univSyntax);
 				
 				if (syndex != -1) {
 					randSyntax = syntax[syndex];
@@ -148,12 +150,11 @@ public class Transpiler {
 				
 				//Swap the universal syntax for random syntax
 				content[i] = curr.replace(univSyntax, randSyntax);
-				Main.log("Transpiled Line: "+content[i]);
 				
 			}
 			
 		}
-		Main.log("Finished Transpiling file.");
+		Main.log("Finished Transpiling file.\n");
 		
 	}
 
