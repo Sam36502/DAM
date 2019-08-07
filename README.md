@@ -4,15 +4,15 @@ ProgrammerHumor Hackathon 2019 Submission.
 ## Download
 
 Latest Version:
- * [Windows](https://github.com/Sam36502/DAM/releases/DAM_1.0_win/)
- * [Linux](https://github.com/Sam36502/DAM/releases/DAM_1.0_lin/)
+ * [v1.1 Windows](https://github.com/Sam36502/DAM/releases/DAM_1.0_win/)
+ * [v1.1 Linux](https://github.com/Sam36502/DAM/releases/DAM_1.0_lin/)
 
 ## Installation
 To install the "Dumb Ass Machina" you must have
 at least version 1.8.0 of the Java Runtime Environment.
 Download the latest version of the DAM for your operating system and unzip the Archive.
 The DAM should be run from the console. If you run it with the -h or --help option you will
-see the following dialogue:
+see the following help Menu:
 
 ```
 Usage:
@@ -20,6 +20,7 @@ Usage:
 
 Options:
   -h, --help      Display the help menu.
+  -v, --version   Prints the current version of the DAM.
   -t, --tag tag   Run a program with a specific tag.
   -l, --log       Runs program and shows info about the process.
   -i, --in input  Starts the program with input.
@@ -34,4 +35,6 @@ Examples:
   DAM.bat --log --show-prog --save-tmp --in Hello helloworld.dam
 ```
 
-##
+## How it works
+
+//Write tomorrow, need zzzzzz
