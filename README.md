@@ -1,5 +1,11 @@
 # DAM
-ProgrammerHumor Hackathon 2019 Submission
+ProgrammerHumor Hackathon 2019 Submission.
+
+## Download
+
+Latest Version:
+ * [Windows](https://github.com/Sam36502/DAM/releases/DAM_1.0_win/)
+ * [Linux](https://github.com/Sam36502/DAM/releases/DAM_1.0_lin/)
 
 ## Installation
 To install the "Dumb Ass Machina" you must have
@@ -8,6 +14,7 @@ Download the latest version of the DAM for your operating system and unzip the A
 The DAM should be run from the console. If you run it with the -h or --help option you will
 see the following dialogue:
 
+```
 Usage:
   DAM.bat [OPTIONS] program
 
@@ -25,3 +32,6 @@ Examples:
   DAM.bat helloworld.dam
   DAM.bat -t 674daf093e8b51c2948f5bb14b426c3d helloworld.dam
   DAM.bat --log --show-prog --save-tmp --in Hello helloworld.dam
+```
+
+##
