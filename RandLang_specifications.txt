@@ -1,0 +1,22 @@
+RandLang keywords and RandVM instruction set
+
+ 0 in  x    : Takes a byte from stdin and stores it in address x
+ 1 out x    : Concatenates the byte at address x to stdout
+ 2 set x y  : Sets the byte at address x to the value y
+ 3 cpy x y  : Copies a byte from x to y
+
+ 4 add x y z: Puts the sum of x and y into z
+ 5 sub x y z: Puts the difference of y and x into z
+ 6 mul x y z: Puts the product of x and y into z
+ 7 div x y z: Puts the integer quotient of x and y into z
+ 8 mod x y z: Puts the remainder of x divided by y into z
+ 9 equ x y z: Sets z to 1 if x and y are equal, else 0
+10 grt x y z: Sets z to 1 if x is greater that y, else 0
+11 lst x y z: Sets z to 1 if x is less that y, else 0
+
+12 if  x    : skips to the next 'end' or 'else' so long as x isn't 0
+13 else     : skips to the next 'end' unless the previous code was executed
+14 end      : ends an if/else statement
+15 jmp x    : Jumps to any line in the program
+
+16 (empty)  : Does nothing
