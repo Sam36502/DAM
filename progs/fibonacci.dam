@@ -1,25 +1,36 @@
-//fibbonacci
+//Calculates fibonacci numbers up to 55
 
-//Limit is 100
-set 5 100
-
-//to convert numbers to ASCII
+//Set constants
+set 0 0
+set 1 1
+set 3 9
+set 5 10
 set 6 48
+set 10 56
+set 11 32
 
-//Starting numbers
-set 1 0
-set 2 1
+//Start of loop
+grt 0 3 2
 
-//Start loop (line 9)
-add 1 6 7
-out 7
-
-add 1 2 3
-cpy 2 1
-cpy 3 2
-
-grt 2 5 4
-if 4
+if 2
+  div 0 5 4
+  add 4 6 4
+  out 4
+  mod 0 5 4
+  add 4 6 4
+  out 4
 else
-  jmp 9
+  add 0 6 4
+  out 4
+end
+out 11
+
+add 0 1 8
+cpy 1 0
+cpy 8 1
+
+lst 0 10 9
+
+if 9
+  jmp 11
 end

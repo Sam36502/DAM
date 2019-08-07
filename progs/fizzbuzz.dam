@@ -1,0 +1,64 @@
+//Fizzbuzz
+set 51 70
+set 52 105
+set 53 122
+set 54 66
+set 55 117
+set 56 10
+
+set 100 100
+set 1 1
+set 3 3
+set 5 5
+set 9 9
+set 10 10
+set 48 48
+
+set 0 0
+
+//Start of Loop
+set 6 0
+mod 0 3 2
+if 2
+else
+  add 6 1 6
+  out 51
+  out 52
+  out 53
+  out 53
+end
+
+mod 0 5 4
+if 4
+else
+  add 6 1 6
+  out 54
+  out 55
+  out 53
+  out 53
+end
+
+grt 0 9 7
+if 7
+  div 0 10 8
+  add 8 48 8
+  mod 0 10 11
+  add 11 48 11
+else
+  set 8 0
+  add 0 48 11
+end
+
+if 6
+else
+  out 8
+  out 11
+end
+
+out 56
+
+add 0 1 0
+lst 0 100 12
+if 12
+  jmp 19
+end
