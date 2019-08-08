@@ -3,6 +3,8 @@ package ch.pearcenet.dam;
 import java.io.File;
 
 public class Main {
+				
+	private static final String VERSION = "1.1";
 	
 	public static boolean logsEnabled = false;
 	public static boolean keepFiles = false;
@@ -17,6 +19,12 @@ public class Main {
 		//Help menu
 		if (argumentIndex(args, "help") != -1) {
 			helpMenu();
+			System.exit(0);
+		}
+		
+		//Print Version
+		if (argumentIndex(args, "version") != -1) {
+			System.out.println("DAM Version " + VERSION);
 			System.exit(0);
 		}
 		
@@ -128,6 +136,7 @@ public class Main {
 				"\n" + 
 				"Options:\n" + 
 				"  -h, --help      Display the help menu.\n" + 
+				"  -v, --version   Prints the current version of the DAM.\n" +
 				"  -t, --tag tag   Run a program with a specific tag.\n" + 
 				"  -l, --log       Runs program and shows info about the process.\n" + 
 				"  -i, --in input  Starts the program with input.\n" +
@@ -138,7 +147,7 @@ public class Main {
 				"Examples:\n" + 
 				"  DAM.bat -h\n" + 
 				"  DAM.bat helloworld.dam\n" + 
-				"  DAM.bat -t 674daf093e8b51c2948f5bb14b426c3d helloworld.dam" +
+				"  DAM.bat -t 674daf093e8b51c2948f5bb14b426c3d helloworld.dam\n" +
 				"  DAM.bat --log --show-prog --save-tmp --in Hello helloworld.dam");
 	}
 
