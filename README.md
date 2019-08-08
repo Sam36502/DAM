@@ -4,8 +4,8 @@ ProgrammerHumor Hackathon 2019 Submission.
 ## Download
 
 Latest Version:
- * [v1.1 Windows](https://github.com/Sam36502/DAM/releases/DAM_1.0_win/)
- * [v1.1 Linux](https://github.com/Sam36502/DAM/releases/DAM_1.0_lin/)
+ * [v1.1 Windows](https://github.com/Sam36502/DAM/releases/v1.1/DAM_1.0_win.zip)
+ * [v1.1 Linux](https://github.com/Sam36502/DAM/releases/v1.1/DAM_1.0_lin.zip)
 
 ## Installation
 To install the "Dumb Ass Machina" you must have
@@ -36,5 +36,13 @@ Examples:
 ```
 
 ## How it works
-
-//Write tomorrow, need zzzzzz
+As the theme of the Hackathon was overengineering, I decided to make a program that could
+run very simple programs via a randomized virtual machine. So when you run a program like
+helloworld, It's actually transpiling the assembly language into a different assembly language with
+randomized syntax and then compiling from the randomized syntax into a randomized instruction set
+and running the compiled binary with a randomized virtual machine.
+```
+            +------------+   +----------+   +-----------------+
+Assembly ==>| Transpiler |==>| Compiler |==>| Virtual Machine |==> Output
+  File      +------------+   +----------+   +-----------------+
+```
