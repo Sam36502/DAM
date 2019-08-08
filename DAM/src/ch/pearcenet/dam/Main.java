@@ -147,8 +147,8 @@ public class Main {
 				"Examples:\n" + 
 				"  DAM.bat -h\n" + 
 				"  DAM.bat helloworld.dam\n" + 
-				"  DAM.bat -t 674daf093e8b51c2948f5bb14b426c3d helloworld.dam\n" +
-				"  DAM.bat --log --show-prog --save-tmp --in Hello helloworld.dam");
+				"  DAM.bat -t 674daf093e8b51c2948f5bb14b426c3d progs/helloworld.dam\n" +
+				"  DAM.bat --log --show-prog --save-tmp --in Hello progs/cat.dam");
 	}
 
 }
