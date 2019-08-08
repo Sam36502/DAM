@@ -4,8 +4,8 @@ ProgrammerHumor Hackathon 2019 Submission.
 ## Download
 
 Latest Version:
- * [v1.1 Windows](https://github.com/Sam36502/DAM/releases/v1.1/DAM_1.0_win.zip)
- * [v1.1 Linux](https://github.com/Sam36502/DAM/releases/v1.1/DAM_1.0_lin.zip)
+ * [v1.1 Windows](https://github.com/Sam36502/DAM/tree/master/releases/v1.1/DAM_1.0_win.zip)
+ * [v1.1 Linux](https://github.com/Sam36502/DAM/tree/master/releases/v1.1/DAM_1.0_lin.zip)
 
 ## Installation
 To install the "Dumb Ass Machina" you must have
