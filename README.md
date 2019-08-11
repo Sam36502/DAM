@@ -9,7 +9,7 @@ Latest Version:
 
 ## Installation
 To install the "Dumb Ass Machina" you must have
-at least version 1.8.0 of the Java Runtime Environment.
+version 1.8.0 or higher of the Java Runtime Environment.
 Download the latest version of the DAM for your operating system and unzip the Archive.
 The DAM should be run from the console. If you run it with the -h or --help option you will
 see the following help Menu:
@@ -37,7 +37,7 @@ Examples:
 
 ## Example Programs
 I really wouldn't recommend writing any more programs for this.
-The assebmbly language is absolutely rubbish.
+The assembly language is absolutely rubbish.
 That is why I have written some programs to show off the
 capabilities of the DAM. These include:
 
@@ -52,7 +52,7 @@ As the theme of the Hackathon was overengineering, I decided to make a program t
 run very simple programs via a randomized virtual machine. So when you run a program like
 helloworld, It's actually transpiling the assembly language into a different assembly language with
 randomized syntax and then compiling from the randomized syntax into a randomized instruction set
-and running the compiled binary with a randomized virtual machine.
+and running the compiled binary with a virtual machine that accepts the randomized instruction set.
 ```
             +------------+   +----------+   +-----------------+
 Assembly ==>| Transpiler |==>| Compiler |==>| Virtual Machine |==> Output
@@ -61,7 +61,7 @@ Assembly ==>| Transpiler |==>| Compiler |==>| Virtual Machine |==> Output
 The first thing that happens is the tag generation. A 32-digit hexadecimal string
 that dictates how the whole system will work together. This also means that if you
 find a specific tag you want to reuse, you can. No randomization is done in the Transpiler, Compiler
-or VM. All the randomness comes from the tag when it's first generated.
+or VM. All the randomization comes from the tag when it's first generated.
 
 The '.dam' Assembly files are first transpiled into a similar language where only the key-words have
 been replaced by somewhat similar key-words. E.g.: `out 1` => `print 1` This means print out the ASCII
@@ -70,7 +70,7 @@ file in the tmp directory.
 
 Next the compiler class takes the transpiled code and converts it into single bytes corresponding to the
 randomized instruction. From the tag, the compiler can see what number instruction it has to write to the
-finished binary. E.g.: `set 1 1` => `2 1 1` => `b 1 1`
+finished binary. E.g.: `set 1 1` => `2 1 1` => `5 1 1`
 The keyword is first transformed into it's instruction number. Afterwards the corresponding randomized instruction number is
 found and written to the compiled file.
 
